@@ -1,5 +1,6 @@
 const axios = require("axios");
 const { Country, Activity } = require("../db");
+const { Op } = require("sequelize");
 
 const saveApiDataDB = async () => {
   const AllApiInfo = await axios.get("http://localhost:5000/countries");
@@ -58,13 +59,7 @@ const findCountryByName = async (name) => {
     where: {
       name: { [Op.iLike]: `%${name}%` },
     },
-    include: {
-      model: Activity,
-      attributes: ["name", "dificulty", "duration", "season"],
-      through: {
-        attributes: [],
-      },
-    },
+    include: Activity,
   });
 
   if (!countryFound) throw Error("error");
