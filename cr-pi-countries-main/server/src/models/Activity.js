@@ -7,8 +7,8 @@ module.exports = (sequelize) => {
     "Activity",
     {
       id: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
         primaryKey: true,
       },
 
@@ -31,7 +31,7 @@ module.exports = (sequelize) => {
       },
 
       season: {
-        type: DataTypes.ENUM("Verano", "Otoño", "Invierno", "Primavera"),
+        type: DataTypes.ENUM("Summer", "Autum", "Winter", "Spring"),
         allowNull: false,
       },
     },

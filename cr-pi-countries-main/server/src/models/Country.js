@@ -7,8 +7,7 @@ module.exports = (sequelize) => {
     "Country",
     {
       id: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
+        type: DataTypes.STRING(3) ,
         primaryKey: true,
       },
 
@@ -24,13 +23,13 @@ module.exports = (sequelize) => {
       },
 
       continent: {
-        type: DataTypes.STRING,
+        type: DataTypes.ARRAY(DataTypes.STRING),
         allowNull: false,
       },
 
       capital: {
-        type: DataTypes.STRING,
-        allowNull: false,
+        type: DataTypes.ARRAY(DataTypes.STRING),
+        allowNull: true,
       },
 
       subregion: {
