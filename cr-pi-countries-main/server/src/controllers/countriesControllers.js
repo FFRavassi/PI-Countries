@@ -59,7 +59,6 @@ const findCountryByName = async (name) => {
     where: {
       name: { [Op.iLike]: `%${name}%` },
     },
-    include: Activity,
   });
 
   if (!countryFound) throw Error("error");

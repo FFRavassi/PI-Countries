@@ -23,15 +23,17 @@ module.exports = (sequelize) => {
           min: 1,
           max: 5,
         },
+        defaultValue: 1,
         allowNull: false,
       },
 
       duration: {
-        type: DataTypes.TIME,
+        type: DataTypes.DECIMAL(2, 1),
+        defaultValue: 1,
       },
 
       season: {
-        type: DataTypes.ENUM("Summer", "Autum", "Winter", "Spring"),
+        type: DataTypes.ARRAY(DataTypes.ENUM("Summer", "Autum", "Winter", "Spring")),
         allowNull: false,
       },
     },

@@ -5,9 +5,9 @@ const {
 } = require("../controllers/countriesControllers");
 
 const getCountries = async (req, res) => {
-  let { name } = req.query;
-
   try {
+    let { name } = req.query;
+
     if (name) {
       const countriesByName = await findCountryByName(name);
       res.status(200).json(countriesByName);
@@ -21,8 +21,9 @@ const getCountries = async (req, res) => {
 };
 
 const getCountriesdetail = async (req, res) => {
-  const { id } = req.params;
   try {
+    const { id } = req.params;
+
     const countryDetail = await findCountryById(id);
     res.status(200).json(countryDetail);
   } catch (error) {
@@ -30,18 +31,7 @@ const getCountriesdetail = async (req, res) => {
   }
 };
 
-/* const getCountriesByName = async (req, res) => {
-  const { name } = req.query;
-  try {
-    const countriesByName = await findCountryByName(name);
-    res.status(200).json(countriesByName);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-}; */
-
 module.exports = {
   getCountries,
   getCountriesdetail,
-  /* getCountriesByName, */
 };
