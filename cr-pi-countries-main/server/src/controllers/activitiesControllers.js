@@ -30,6 +30,10 @@ const createActInDB = async ({
 
 const activitiesFromDB = async () => {
   const activitiesFound = await Activity.findAll();
+
+  if (!activitiesFound[0])
+    throw Error("No activity has been created yet");
+
   return activitiesFound;
 };
 
