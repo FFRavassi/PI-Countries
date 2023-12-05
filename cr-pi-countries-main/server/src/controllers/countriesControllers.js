@@ -17,13 +17,6 @@ const saveApiDataDB = async () => {
     };
   });
 
-  // El método va a buscar una entrada en el modelo Country que tenga un id igual
-  // al id del elemento que traigo de la API. Si no la encuentra (y no lo hará ya
-  // que mi modelo está vacío), entonces crea una nueva entrada en el modelo y la
-  // llena con los datos que tiene el elemento traido de la API (aqui se llena la
-  // BD). La entrada nueva queda guardada en la constante created, la cual es
-  // tansformada a formato JSON ¿¿¿ y pusheada en el array modelData ???.
-
   const modelData = [];
 
   for (const element of filterApi) {

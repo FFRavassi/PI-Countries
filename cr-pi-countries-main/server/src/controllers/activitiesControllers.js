@@ -7,6 +7,9 @@ const createActInDB = async ({
   season,
   countries,
 }) => {
+  if (!name || !dificulty || !season)
+    throw Error("Please complete the required fields");
+
   const [activity, created] = await Activity.findOrCreate({
     where: { name: name },
     defaults: {

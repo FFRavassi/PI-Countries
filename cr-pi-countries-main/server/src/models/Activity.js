@@ -23,7 +23,6 @@ module.exports = (sequelize) => {
           min: 1,
           max: 5,
         },
-        defaultValue: 1,
         allowNull: false,
       },
 
