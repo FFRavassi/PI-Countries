@@ -7,17 +7,23 @@ const createActInDB = async ({
   season,
   countries,
 }) => {
-  const newlyCreated = await Activity.create({
-    name,
-    dificulty,
-    duration,
-    season,
+  const [activity, created] = await Activity.findOrCreate({
+    where: { name: name },
+    defaults: {
+      name: name,
+      dificulty: dificulty,
+      duration: duration,
+      season: season,
+    },
   });
 
-  newlyCreated.addCountries(countries);
+  if (!created) throw Error("This activity was already created");
 
-  return newlyCreated;
+  activity.addCountries(countries);
+  return activity;
 };
+
+//!-------------------------------------------------------------------------------------------------//
 
 const activitiesFromDB = async () => {
   const activitiesFound = await Activity.findAll();

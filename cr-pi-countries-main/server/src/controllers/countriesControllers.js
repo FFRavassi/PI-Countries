@@ -36,9 +36,9 @@ const saveApiDataDB = async () => {
   return modelData;
 };
 
-const findCountryById = async (id) => {
-  await saveApiDataDB();
+//!-------------------------------------------------------------------------------------------------//
 
+const findCountryById = async (id) => {
   const detail = await Country.findByPk(id, {
     include: {
       model: Activity,
@@ -49,10 +49,12 @@ const findCountryById = async (id) => {
     },
   });
 
-  if (!detail) throw Error("ID not found");
+  if (!detail) throw Error("There is no country with that ID");
 
   return detail;
 };
+
+//!-------------------------------------------------------------------------------------------------//
 
 const findCountryByName = async (name) => {
   const countryFound = await Country.findAll({
@@ -61,7 +63,7 @@ const findCountryByName = async (name) => {
     },
   });
 
-  if (!countryFound) throw Error("error");
+  if (!countryFound[0]) throw Error(`The country ${name} doesn't exist`);
 
   return countryFound;
 };
