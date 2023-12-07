@@ -41,9 +41,7 @@ const findCountryById = async (id) => {
       },
     },
   });
-
-  if (!detail) throw Error("There is no country with that ID");
-
+  
   return detail;
 };
 
