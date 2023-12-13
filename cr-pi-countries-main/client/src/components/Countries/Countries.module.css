@@ -1,0 +1,8 @@
+.disposition {
+  background-color: chartreuse;
+  width: 150%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 1.3em;
+  margin-left: 0.5cm;
+}

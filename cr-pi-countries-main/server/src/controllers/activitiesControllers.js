@@ -2,19 +2,19 @@ const { Activity } = require("../db");
 
 const createActInDB = async ({
   name,
-  dificulty,
+  difficulty,
   duration,
   season,
   countries,
 }) => {
-  if (!name || !dificulty || !season)
+  if (!name || !difficulty || !season)
     throw Error("Please complete the required fields");
 
   const [activity, created] = await Activity.findOrCreate({
     where: { name: name },
     defaults: {
       name: name,
-      dificulty: dificulty,
+      difficulty: difficulty,
       duration: duration,
       season: season,
     },
@@ -31,8 +31,7 @@ const createActInDB = async ({
 const activitiesFromDB = async () => {
   const activitiesFound = await Activity.findAll();
 
-  if (!activitiesFound[0])
-    throw Error("No activity has been created yet");
+  if (!activitiesFound[0]) throw Error("No activity has been created yet");
 
   return activitiesFound;
 };

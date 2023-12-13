@@ -1,0 +1,29 @@
+.container{
+    background-color: blueviolet;
+    display: flex;
+    justify-content:center;
+    margin-top: 5em;
+    padding: 1em 0 2em 0;
+}
+
+.right {
+    margin-right: 5em;
+}
+
+.name {
+    padding-bottom: 0.5em;
+    font-size: xx-large;
+    font-weight: 600;    
+}
+
+.data {
+    font-size: large;
+    font-weight: 600;
+}
+
+.activities {
+    margin-left: 5em;
+    padding-top: 0.4em;
+    font-size: x-large;
+    font-weight: 600;
+}

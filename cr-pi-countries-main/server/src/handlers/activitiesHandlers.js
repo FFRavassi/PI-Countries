@@ -5,11 +5,11 @@ const {
 
 const createActivity = async (req, res) => {
   try {
-    const { name, dificulty, duration, season, countries } = req.body;
+    const { name, difficulty, duration, season, countries } = req.body;
 
     const newActivity = await createActInDB({
       name,
-      dificulty,
+      difficulty,
       duration,
       season,
       countries,
