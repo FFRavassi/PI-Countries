@@ -5,12 +5,14 @@
 }
 
 .button1 {
-  padding: 1mm;
+  padding: 2mm;
   margin-right: 1em;
+  cursor: pointer;
 }
 
 .button2 {
   padding: 1mm;
+  cursor: pointer;
 }
 
 .start {
@@ -26,4 +28,5 @@
 
 .button2 {
   padding: 2mm;
+  cursor: pointer;
 }

@@ -4,16 +4,17 @@ import style from "./FormActivities.module.css";
 
 const FormActivities = () => {
   return (
-    <div className={style.container}>
+    <form className={style.container}>
       <h1 className={style.title}>New Activity</h1>
       <div className={style.fila1}>
         <div>
           <h3>Name:</h3>
-          <input type="text"></input>
+          <input id="name" type="text" autoComplete="off"></input>
         </div>
         <div>
           <h3>Duration:</h3>
           <input
+            id="duration"
             type="number"
             step="0.5"
             min="0"
@@ -23,17 +24,17 @@ const FormActivities = () => {
         </div>
         <div>
           <h3>Select countries:</h3>
-          <input type="search"></input>
+          <input id="countriesSelect" type="search"></input>
         </div>
         <div>
           <h3>Selected countries</h3>
-          <button>Create Activity</button>
+          <button id="create">Create Activity</button>
         </div>
       </div>
       <div className={style.fila2}>
         <div className={style.difficulty}>
           <h3>Difficulty:</h3>
-          <input type="range" min="0" max="4"></input>
+          <input id="difficulty" type="range" min="0" max="4"></input>
         </div>
         <div className={style.seasons}>
           <h3>Season:</h3>
@@ -44,7 +45,7 @@ const FormActivities = () => {
               name="season1"
               value="summer"
             ></input>
-            <label for="summer">Summer</label>
+            <label htmlFor="summer">Summer</label>
           </div>
           <div>
             <input
@@ -53,7 +54,7 @@ const FormActivities = () => {
               name="season2"
               value="autum"
             ></input>
-            <label for="autum">Autum</label>
+            <label htmlFor="autum">Autum</label>
           </div>
           <div>
             <input
@@ -62,7 +63,7 @@ const FormActivities = () => {
               name="season3"
               value="winter"
             ></input>
-            <label for="winter">Winter</label>
+            <label htmlFor="winter">Winter</label>
           </div>
           <div>
             <input
@@ -71,11 +72,11 @@ const FormActivities = () => {
               name="season4"
               value="spring"
             ></input>
-            <label for="spring">Spring</label>
+            <label htmlFor="spring">Spring</label>
           </div>
         </div>
       </div>
-    </div>
+    </form>
   );
 };
 

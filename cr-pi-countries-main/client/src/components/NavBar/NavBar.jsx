@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import style from "./NavBar.module.css";
 
@@ -11,9 +12,17 @@ const NavBar = () => {
         width="5%"
       ></img>
       <div className={style.buttons}>
-        <button>Home</button>
-        <button>Add Activity</button>
-        <button>Out</button>
+        <Link to="/home">
+          <button id="home">Home</button>
+        </Link>
+
+        <Link to="/activities">
+          <button id="add">Add Activity</button>
+        </Link>
+
+        <Link to="/">
+          <button id="out">Out</button>
+        </Link>
       </div>
     </div>
   );

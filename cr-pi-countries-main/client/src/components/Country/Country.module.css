@@ -1,9 +1,19 @@
 .container {
+  position: relative;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  border: 1px solid;
+  border: 2px solid;
   border-radius: 15px;
-  height: 4.6cm;
-  padding: 25px;
+  height: 8cm;
+  padding: 15px;
+}
+
+.container img {
+  width: 100%;
+  object-fit: contain;
+}
+
+.button1{
   cursor: pointer;
 }
