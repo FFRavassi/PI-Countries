@@ -27,12 +27,18 @@ module.exports = (sequelize) => {
       },
 
       duration: {
-        type: DataTypes.DECIMAL(2, 1),
+        type: DataTypes.DECIMAL(3, 1),
         defaultValue: 1,
+        validate: {
+          min: 0.5,
+          max: 12,
+        },
       },
 
       season: {
-        type: DataTypes.ARRAY(DataTypes.ENUM("Summer", "Autum", "Winter", "Spring")),
+        type: DataTypes.ARRAY(
+          DataTypes.ENUM("Summer", "Autum", "Winter", "Spring")
+        ),
         allowNull: false,
       },
     },

@@ -1,17 +1,1 @@
-.container {
-  background-color: darkorchid;
-  display: flex;
-  justify-content: center;
-  width: 154%;
-  user-select: none;
-  margin-top: 2.4em;
-  line-height: 45px;
-}
 
-.container li{
-  display: inline-block;
-  margin: 5px;
-  font-size: 1.2em;
-  font-weight:lighter;
-
-}

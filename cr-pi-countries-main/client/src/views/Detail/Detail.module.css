@@ -1,52 +1,10 @@
 .container {
-  background-color: blueviolet;
   display: flex;
-  justify-content: center;
-  margin-top: 5em;
-  padding: 1em 0 2em 0;
+  justify-content: space-evenly;
+  margin-top: 3em;
 }
 
-.right {
-  margin-right: 5em;
-}
-
-.nameFlagContainer {
-  display: flex;
-  align-items: center;
-  padding: 0.5em;
-  gap: 1rem;
-}
-
-.flag {
-  width: 8em;
-  height: 8em;
-  border-radius: 100%;
-  object-fit: cover;
-  border: 3px solid #000;
-}
-
-.name {
-  font-size: xx-large;
-  font-weight: 600;
-}
-
-.data {
-  font-size: large;
-  font-weight: 600;
-}
-
-.activitiesContainer {
-  margin-left: 5em;
-  padding-top: 2.4em;
-}
-
-.activitiesContainer h3 {
-  font-size: x-large;
-  font-weight: 600;
-  text-align: center;
-}
-
-.actSpace {
+.listAct {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1em;
@@ -54,19 +12,11 @@
   overflow-y: scroll;
 }
 
-.actSpace::-webkit-scrollbar {
+.listAct::-webkit-scrollbar {
   display: none;
 }
 
-.eachAct {
+.back {
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.eachAct h4 {
-  margin-bottom: 0.5em;
-  text-transform: uppercase;
 }

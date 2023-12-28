@@ -1,32 +1,33 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { filterPage } from "../../Redux/Actions/countriesActions";
 
-import style from "./Paging.module.css";
+// import style from "./Paging.module.css";
 
-function Paging() {
+function Paging({ allCountries, countriesPerPage }) {
+  const dispatch = useDispatch();
+
+  const pageNumbers = [];
+
+  for (let i = 1; i <= Math.ceil(allCountries / countriesPerPage); i++) {
+    pageNumbers.push(i);
+  }
+
   return (
-    <div className={style.container}>
-      <li>
-        <a href="#">Prev</a>
-      </li>
-      <li>
-        <a href="#">1</a>
-      </li>
-      <li>
-        <a href="#">2</a>
-      </li>
-      <li>
-        <a href="#">3</a>
-      </li>
-      <li>
-        <a href="#">4</a>
-      </li>
-      <li>
-        <a href="#">5</a>
-      </li>
-      <li>
-        <a href="#">Next</a>
-      </li>
-    </div>
+    <nav>
+      <div>
+        {pageNumbers &&
+          pageNumbers.map((number) => (
+            <button
+              key={number}
+              type="button"
+              onClick={() => dispatch(filterPage(number))}
+            >
+              {number}
+            </button>
+          ))}
+      </div>
+    </nav>
   );
 }
 

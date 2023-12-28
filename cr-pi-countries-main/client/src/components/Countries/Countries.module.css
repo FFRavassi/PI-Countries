@@ -1,6 +1,4 @@
 .disposition {
-  background-color: chartreuse;
-  
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   grid-gap: 1.3em;

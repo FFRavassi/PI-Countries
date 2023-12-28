@@ -1,19 +1,19 @@
 .container {
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  border: 2px solid;
-  border-radius: 15px;
-  height: 8cm;
-  padding: 15px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid;
+    border-radius: 15px;
+    height: 8cm;
+    padding: 15px;
 }
 
 .container img {
-  width: 100%;
-  object-fit: contain;
-}
-
-.button1{
-  cursor: pointer;
-}
+    width: 100%;
+    object-fit: contain;
+  }
+  
+  .button1{
+    cursor: pointer;
+  }

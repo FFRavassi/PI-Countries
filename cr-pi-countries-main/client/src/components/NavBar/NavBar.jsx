@@ -1,19 +1,26 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
-import style from "./NavBar.module.css";
+function NavBar() {
+  const history = useNavigate();
+  const location = useLocation();
 
-const NavBar = () => {
+  const refresh = () => {
+    location.pathname === "/home" ? history(0) : history("/home");
+  };
+
   return (
-    <div className={style.container}>
+    <div>
       <img
         src="https://upload.wikimedia.org/wikipedia/commons/5/50/Earth_clip_art.svg"
         alt="logo"
         width="5%"
-      ></img>
-      <div className={style.buttons}>
+      />
+      <div>
         <Link to="/home">
-          <button id="home">Home</button>
+          <button id="home" onClick={refresh}>
+            Restart
+          </button>
         </Link>
 
         <Link to="/activities">
@@ -26,6 +33,6 @@ const NavBar = () => {
       </div>
     </div>
   );
-};
+}
 
 export default NavBar;

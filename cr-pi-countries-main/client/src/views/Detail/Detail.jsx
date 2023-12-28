@@ -1,93 +1,83 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-
-import { getCountriesById } from "../../Redux/Actions/countriesActions";
+import axios from "axios";
+import { useParams, useNavigate } from "react-router-dom";
 
 import style from "./Detail.module.css";
 
-const Detail = () => {
-  const dispatch = useDispatch();
-  const countryData = useSelector((state) => state.detailsById);
-  Object.values(countryData);
+function Detail() {
   const { id } = useParams();
-
-  console.log(countryData);
+  const history = useNavigate();
+  const [countryData, setCountryData] = React.useState({});
 
   React.useEffect(() => {
-    dispatch(getCountriesById(id));
-  }, [dispatch, id]);
+    axios(`http://localhost:3001/countries/${id}`)
+      .then(({ data }) => {
+        setCountryData(data);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  }, [id]);
+
+  const handleFilterBack = () => {
+    history(-1);
+  };
 
   return (
     <div className={style.container}>
-      <div className={style.right}>
-        <div className={style.nameFlagContainer}>
+      <div>
+        <div>
           <img
-            className={style.flag}
             src={countryData.flag}
             alt={`${countryData.name} flag`}
+            width="200px"
           />
-          <h1 className={style.name}>{countryData.name}</h1>
+          <h1>{countryData.name}</h1>
         </div>
-        <div className={style.data}>
-          <ul>
-            <li>Continent: {countryData.continent} </li>
-          </ul>
-          <ul>
-            <li>Subregion: {countryData.subregion} </li>
-          </ul>
-          <ul>
-            <li>Capital: {countryData.capital} </li>
-          </ul>
-          <ul>
-            <li>Population: {countryData.population} </li>
-          </ul>
-          <ul>
-            <li>Area: {countryData.area} </li>
-          </ul>
+        <div>
+          {countryData.continent == "North America" ||
+          countryData.continent == "South America" ? (
+            <h4>Continent: America</h4>
+          ) : (
+            <h4>Continent: {countryData.continent}</h4>
+          )}
+          <h4>Subregion: {countryData.subregion}</h4>
+          <h4>Capital: {countryData.capital}</h4>
+          <h4>Area: {countryData.area} km2</h4>
+          <h4>Population: {countryData.population}</h4>
         </div>
       </div>
-      <div className={style.activitiesContainer}>
-        <h3>Activities</h3>
-        <div>
-          <div className={style.actSpace}>
-            {countryData.Activities && (
-              <>
-                {countryData.Activities.map((act) => {
-                  return (
-                    <div key={act.id} className={style.eachAct}>
-                      <h4>{act.name}</h4>
-                      <div>
-                        <p className={style.actValue}>
-                          Difficulty:
-                          <span> {act.difficulty}</span>
-                        </p>
-                        <p className={style.actValue}>
-                          Duration:
-                          <span> {act.duration} hs</span>
-                        </p>
-                        <p className={style.actValue}>
-                          Season:
-                          <span>{act.season.map((el) => ` ${el}/`)}</span>
-                        </p>
-                      </div>
-                    </div>
-                  );
-                })}
-              </>
-            )}
-            {!countryData.Activities && (
-              <div>
-                <p className={style.notFound}>
-                  There are no activities created for this country
-                </p>
-              </div>
-            )}
-          </div>
+
+      <div>
+        <h2>Activities</h2>
+        <div className={style.listAct}>
+          {countryData.Activities && (
+            <>
+              {countryData.Activities.map((act) => {
+                return (
+                  <div key={act.name}>
+                    <h3>{act.name}</h3>
+                    <h4>
+                      Difficulty:
+                      <span> {act.difficulty}</span>
+                    </h4>
+                    <h4>
+                      Duration:
+                      <span> {act.duration} hs</span>
+                    </h4>
+                    <h4>
+                      Season:
+                      <span>{act.season.map((el) => ` ${el} `)}</span>
+                    </h4>
+                  </div>
+                );
+              })}
+            </>
+          )}
         </div>
       </div>
     </div>
   );
-};
+}
 
 export default Detail;
