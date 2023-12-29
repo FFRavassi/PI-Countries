@@ -19,7 +19,7 @@ import { ASCENDING, DESCENDING, POPDESC } from "../sortConsts/sortConsts";
 const initialState = {
   allCountries: [],
   filteredCountries: [],
-  allActivities: [], 
+  allActivities: [],
   activePage: 1,
 };
 
