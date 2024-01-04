@@ -19,7 +19,7 @@ function NavBar() {
       <div>
         <Link to="/home">
           <button id="home" onClick={refresh}>
-            Restart
+            Home
           </button>
         </Link>
 

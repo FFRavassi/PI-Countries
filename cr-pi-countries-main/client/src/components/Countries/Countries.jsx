@@ -8,7 +8,6 @@ import style from "./Countries.module.css";
 
 function Countries() {
   const allCountries = useSelector((state) => state.filteredCountries);
-  /* const allActivities = useSelector((state) => state.allActivities); */
 
   const dispatch = useDispatch();
 

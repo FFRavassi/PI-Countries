@@ -17,6 +17,7 @@ const createActInDB = async ({
       difficulty: difficulty,
       duration: duration,
       season: season,
+      countries: countries,
     },
   });
 
@@ -31,7 +32,7 @@ const createActInDB = async ({
 const activitiesFromDB = async () => {
   const activitiesFound = await Activity.findAll();
 
-  if (!activitiesFound[0]) throw Error("No activity has been created yet");
+  if (!activitiesFound[0]) console.error("No activity has been created yet");
 
   return activitiesFound;
 };

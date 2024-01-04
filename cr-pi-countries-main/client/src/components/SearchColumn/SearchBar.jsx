@@ -1,6 +1,9 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCountriesByName } from "../../Redux/Actions/countriesActions";
+import {
+  getCountriesByName,
+  getAllCountries,
+} from "../../Redux/Actions/countriesActions";
 
 // import style from "./SearchBar.module.css"
 
@@ -11,7 +14,7 @@ function SearchBar({ setSelectedCountry }) {
 
   const [searchString, setSearchString] = React.useState("");
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (searchString === "") {
       alert("There are no countries typed");
@@ -26,7 +29,7 @@ function SearchBar({ setSelectedCountry }) {
     if (validation.length < 1) {
       return alert("The country you are searching for doesn't exist");
     } else {
-      await dispatch(getCountriesByName(searchString));
+      dispatch(getCountriesByName(searchString));
       setSelectedCountry(validation[0]);
     }
     setSearchString("");
@@ -34,11 +37,12 @@ function SearchBar({ setSelectedCountry }) {
 
   const handleChange = (e) => {
     e.preventDefault();
-    setSearchString(e.target.value);
+    setSearchString(e.target.value.trim());
   };
 
   return (
     <>
+      <button onClick={() => dispatch(getAllCountries())}>Restart</button>
       <form onSubmit={handleSubmit}>
         <label>Search country:</label>
         <input

@@ -13,9 +13,6 @@ function FormActivities() {
   }, []);
 
   const allCountries = useSelector((state) => state.allCountries);
-  const [selectedCountries, setSelectedCountries] = React.useState([]);
-
-  const [errors, setErrors] = React.useState({});
 
   const [input, setInput] = React.useState({
     name: "",
@@ -25,11 +22,45 @@ function FormActivities() {
     countries: [],
   });
 
-  function handleSeason(e) {
+  const [errors, setErrors] = React.useState({});
+
+  //!-------------------------------------------HANDLERS-----------------------------------------------//
+
+  function handleActName(e) {
     setInput({
       ...input,
-      season: [...input.season, e.target.value],
+      name: e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1),
     });
+  }
+
+  function handleDifficulty(e) {
+    const difficulty = e.target.value;
+
+    setInput({
+      ...input,
+      difficulty: difficulty,
+    });
+    setErrors(
+      validate({
+        ...input,
+        difficulty: difficulty,
+      })
+    );
+    changeDifficulty(difficulty);
+  }
+
+  const diffText = React.useRef(null);
+
+  function changeDifficulty(difficulty) {
+    const difficultyNames = [
+      { name: "Super Easy" /* className: style.superEasy */ },
+      { name: "Easy" /* className: style.easy */ },
+      { name: "Medium" /* className: style.medium */ },
+      { name: "Hard" /* className: style.hard */ },
+      { name: "Really Hard" /* className: style.reallyHard */ },
+    ];
+    diffText.current.innerText = difficultyNames[difficulty - 1].name; /* 
+    diffText.current.className = difficultyNames[difficulty - 1].className; */
   }
 
   function handleDuration(e) {
@@ -37,21 +68,38 @@ function FormActivities() {
       ...input,
       duration: e.target.value,
     });
+    setErrors(
+      validate({
+        ...input,
+        duration: e.target.value,
+      })
+    );
   }
 
-  function handleDifficulty(e) {
+  function handleSeason(e) {
     setInput({
       ...input,
-      difficulty: e.target.value,
+      season: [...input.season, e.target.value],
     });
+    setErrors(
+      validate({
+        ...input,
+        season: [...input.season, e.target.value],
+      })
+    );
   }
 
-  function handleSelection(e) {
-    setSelectedCountries([...selectedCountries, e.target.value]);
+  function handleCountSelect(e) {
     setInput({
       ...input,
       countries: [...input.countries, e.target.value],
     });
+    setErrors(
+      validate({
+        ...input,
+        countries: [...input.countries, e.target.value],
+      })
+    );
   }
 
   function handleDelete(e) {
@@ -66,17 +114,11 @@ function FormActivities() {
     });
   }
 
-  function handleActName(e) {
-    setInput({
-      ...input,
-      name: e.target.value,
-    });
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault();
+  function handleSubmit() {
     dispatch(postNewActivity(input));
-    alert("The new activity has been created successfully");
+    Object.keys(errors).length
+      ? alert("You must complete all the required fields")
+      : alert("The new activity has been created successfully");
     setInput({
       name: "",
       difficulty: "",
@@ -84,6 +126,30 @@ function FormActivities() {
       season: [],
       countries: [],
     });
+  }
+
+  //!-------------------------------------------VALIDATION-----------------------------------------------//
+
+  function validate(input) {
+    let errors = {};
+
+    /* !input.name
+      ? (errors.name = "Activity's name is required")
+      : input.name.length > 100
+      ? (errors.name = "100 characters max")
+      : /^[^\W_]+$/.test(input.name)
+      ? (errors.name = "Special characters are not allowed")
+      : */ !input.difficulty
+      ? (errors.difficulty = "You must select a difficulty")
+      : !input.duration
+      ? (errors.duration = "You must select a duration for the activity")
+      : !input.season.length
+      ? (errors.season = "You must select at least one season")
+      : !input.countries.length
+      ? (errors.countries = "You must select at least one country")
+      : console.log(input);
+
+    return errors;
   }
 
   return (
@@ -94,84 +160,43 @@ function FormActivities() {
           <label>
             Name
             <input
-              name="name"
               type="text"
               autoComplete="off"
               value={input.name}
               onChange={handleActName}
             />
           </label>
+          {/* <span>{errors.name}</span> */}
         </div>
 
         <div>
-          <label>Difficulty Level</label>
-          <div>
-            <label>
-              <input
-                type="radio"
-                name="difficulty"
-                value="1"
-                onChange={(e) => handleDifficulty(e)}
-              />
-              Super Easy
-            </label>
-
-            <label>
-              <input
-                type="radio"
-                name="difficulty"
-                value="2"
-                onChange={(e) => handleDifficulty(e)}
-              />
-              Easy
-            </label>
-
-            <label>
-              <input
-                type="radio"
-                name="difficulty"
-                value="3"
-                onChange={(e) => handleDifficulty(e)}
-              />
-              Medium
-            </label>
-
-            <label>
-              <input
-                type="radio"
-                name="difficulty"
-                value="4"
-                onChange={(e) => handleDifficulty(e)}
-              />
-              Hard
-            </label>
-
-            <label>
-              <input
-                type="radio"
-                name="difficulty"
-                value="5"
-                onChange={(e) => handleDifficulty(e)}
-              />
-              Super Hard
-            </label>
-          </div>
+          <label htmlFor="difficulty">Difficulty Level</label>
+          <input
+            type="range"
+            min="1"
+            max="5"
+            id="difficulty"
+            defaultValue={1}
+            onChange={(e) => handleDifficulty(e)}
+          />
+          <p ref={diffText} /*  className={style.superEasy} */>Super Easy</p>
+          {errors.difficulty && <span>{errors.difficulty}</span>}
         </div>
 
         <div>
           <label>
-            Duration:
+            Duration(hs)
             <input
               type="number"
-              name="duration"
               value={input.duration}
-              placeholder=" Max:24 hours"
+              placeholder=" Max:12 hours"
               step="0.5"
               min="0.5"
               max="12"
               onChange={handleDuration}
             />
           </label>
+          {errors.duration && <span>{errors.duration}</span>}
         </div>
 
         <div>
@@ -179,7 +204,6 @@ function FormActivities() {
           <div>
             <label>
               <input
-                name="summer"
                 value="Summer"
                 type="checkbox"
                 onChange={(e) => handleSeason(e)}
@@ -189,7 +213,6 @@ function FormActivities() {
 
             <label>
               <input
-                name="autum"
                 value="Autum"
                 type="checkbox"
                 onChange={(e) => handleSeason(e)}
@@ -199,7 +222,6 @@ function FormActivities() {
 
             <label>
               <input
-                name="winter"
                 value="Winter"
                 type="checkbox"
                 onChange={(e) => handleSeason(e)}
@@ -209,25 +231,26 @@ function FormActivities() {
 
             <label>
               <input
-                name="spring"
                 value="Spring"
                 type="checkbox"
                 onChange={(e) => handleSeason(e)}
               />
               Spring
             </label>
+            {errors.season && <span>{errors.season}</span>}
           </div>
         </div>
 
         <div>
           <label>Select Countries</label>
-          <select onChange={(e) => handleSelection(e)}>
+          <select onChange={(e) => handleCountSelect(e)}>
             {allCountries.map((country) => (
               <option key={country.id} value={country.id}>
                 {country.name}
               </option>
             ))}
           </select>
+          {errors.countries && <span>{errors.countries}</span>}
         </div>
 
         <div>

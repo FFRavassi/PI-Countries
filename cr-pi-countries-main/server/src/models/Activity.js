@@ -41,6 +41,11 @@ module.exports = (sequelize) => {
         ),
         allowNull: false,
       },
+
+      countries: {
+        type: DataTypes.ARRAY(DataTypes.STRING),
+        allowNull: false,
+      },
     },
     {
       timestamps: false,

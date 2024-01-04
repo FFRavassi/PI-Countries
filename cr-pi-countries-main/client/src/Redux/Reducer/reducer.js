@@ -1,33 +1,28 @@
-// Importar las action-types
 import {
   GET_ALL_COUNTRIES,
   GET_COUNTRIES_BY_NAME,
-  /* GET_COUNTRIES_BY_ID, */
+  GET_COUNTRIES_BY_ID,
   FILTER_BY_CONTINENT,
   SORT_BY_ABC,
   SORT_BY_POPULATION,
   FILTER_PAGE,
   GET_ALL_ACTIVITIES,
   POST_NEW_ACTIVITY,
-  REMOVE_ACTIVITY,
   FILTER_BY_ACTIVITY,
 } from "../Actions/action-types";
 
 import { ASCENDING, DESCENDING, POPDESC } from "../sortConsts/sortConsts";
 
-//Definir el initial state
 const initialState = {
   allCountries: [],
   filteredCountries: [],
+  countryById: [],
   allActivities: [],
   activePage: 1,
 };
 
-//Definir la función rootReducer
 export const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
-    // Se obtienen los datos de los paises desde la API, y a su vez, sea actualiza el state con los datos obtenidos e se inicializa
-    //"filteredCountries" con los mismos datos.
     case GET_ALL_COUNTRIES:
       let alphaDefault = payload.sort((a, b) => a.name.localeCompare(b.name));
       return {
@@ -36,15 +31,18 @@ export const rootReducer = (state = initialState, { type, payload }) => {
         filteredCountries: alphaDefault,
       };
 
-    // Se filtran los paises segun la busqueda que se quiera realizar. El nombre del pais se puede escribir en minusculas. Tambien
-    // se actualiza el estado con los paises filtrados.
     case GET_COUNTRIES_BY_NAME:
       return {
         ...state,
         filteredCountries: payload,
       };
 
-    // Se filtran los paises segun continente, y se actualiza el estado con los paises filtrados.
+    case GET_COUNTRIES_BY_ID:
+      return {
+        ...state,
+        countryById: payload,
+      };
+
     case FILTER_BY_CONTINENT:
       const continentFilter = state.allCountries.filter((country) =>
         country.continent[0].includes(payload)
@@ -103,22 +101,25 @@ export const rootReducer = (state = initialState, { type, payload }) => {
         allActivities: [...state.allActivities, payload],
       };
 
-    case REMOVE_ACTIVITY:
-      const remainingActivities = state.allActivities.filter(
-        (act) => act.name !== payload
-      );
-      return {
-        ...state,
-        allActivities: remainingActivities,
-      };
-
     case FILTER_BY_ACTIVITY:
-      const countriesWithAct = state.allCountries.filter((count) =>
-        count.activities.includes(payload)
+      let countriesWAct = [];
+      let allCountries2 = state.allCountries;
+
+      const selectedAct = state.allActivities.find(
+        (ele) => ele.name === payload
       );
+      for (let k = 0; k < selectedAct.countries.length; k++) {
+        for (let l = 0; l < allCountries2.length; l++) {
+          if (selectedAct.countries[k] === allCountries2[l].id) {
+            countriesWAct.push(allCountries2[l]);
+          }
+        }
+      }
+
       return {
         ...state,
-        filteredCountries: countriesWithAct,
+        filteredCountries: countriesWAct,
+        activePage: 1,
       };
 
     default:

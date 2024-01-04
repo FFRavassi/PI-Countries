@@ -8,24 +8,32 @@ import {
 } from "../../Redux/sortConsts/sortConsts";
 import {
   getAllCountries,
+  filterByContinent,
   sortByAbc,
   sortByPopulation,
-  filterByContinent,
 } from "../../Redux/Actions/countriesActions";
-import { filterByActivity } from "../../Redux/Actions/activitiesActions";
+import {
+  filterByActivity,
+  getAllActivities,
+} from "../../Redux/Actions/activitiesActions";
 
 // import style from "./filtersYSort.module.css";
 
 function FiltersYSort() {
   const dispatch = useDispatch();
 
+  React.useState(() => {
+    dispatch(getAllActivities());
+  }, []);
+
   const allActivities = useSelector((state) => state.allActivities);
 
   function handleContinentFilter(e) {
     const selection = e.target.value;
-    if (selection !== "select") {
-      dispatch(filterByContinent(selection));
+    if (selection === "All") {
+      dispatch(getAllCountries());
     }
+    dispatch(filterByContinent(selection));
   }
 
   function handleSortChange(e) {
@@ -43,7 +51,9 @@ function FiltersYSort() {
 
   function handleActivityFilter(e) {
     const selection = e.target.value;
-    if (selection !== "select") {
+    if (selection === "all") {
+      dispatch(filterByActivity(allActivities));
+    } else if (selection !== "select" && selection !== "all") {
       dispatch(filterByActivity(selection));
     }
   }
@@ -58,9 +68,7 @@ function FiltersYSort() {
             defaultValue="select"
             onChange={handleContinentFilter}
           >
-            <option value="select" disabled hidden>
-              --Select a continent--
-            </option>
+            <option value="All">All</option>
             <option value="Africa">Africa</option>
             <option value="America">America</option>
             <option value="Antarctica">Antarctica</option>
@@ -80,6 +88,7 @@ function FiltersYSort() {
             <option value="select" disabled hidden>
               --Select an activity--
             </option>
+            <option value="all">All</option>
             {allActivities &&
               allActivities.map((act) => (
                 <option value={act.name} key={act.id}>

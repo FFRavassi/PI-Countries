@@ -1,27 +1,18 @@
 import React from "react";
-import axios from "axios";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getCountriesById } from "../../Redux/Actions/countriesActions";
 
 import style from "./Detail.module.css";
 
 function Detail() {
   const { id } = useParams();
-  const history = useNavigate();
-  const [countryData, setCountryData] = React.useState({});
+  const dispatch = useDispatch();
+  const countryData = useSelector((state) => state.countryById);
 
   React.useEffect(() => {
-    axios(`http://localhost:3001/countries/${id}`)
-      .then(({ data }) => {
-        setCountryData(data);
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
-  }, [id]);
-
-  const handleFilterBack = () => {
-    history(-1);
-  };
+    dispatch(getCountriesById(id));
+  }, [dispatch, id]);
 
   return (
     <div className={style.container}>
@@ -59,7 +50,17 @@ function Detail() {
                     <h3>{act.name}</h3>
                     <h4>
                       Difficulty:
-                      <span> {act.difficulty}</span>
+                      {act.difficulty === 1 ? (
+                        <span> Super Easy</span>
+                      ) : act.difficulty === 2 ? (
+                        <span> Easy</span>
+                      ) : act.difficulty === 3 ? (
+                        <span> Medium</span>
+                      ) : act.difficulty === 4 ? (
+                        <span> Hard</span>
+                      ) : (
+                        <span> Super Hard</span>
+                      )}
                     </h4>
                     <h4>
                       Duration:
