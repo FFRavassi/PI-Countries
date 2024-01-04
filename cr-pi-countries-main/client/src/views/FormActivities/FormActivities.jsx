@@ -1,5 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { getAllCountries } from "../../Redux/Actions/countriesActions";
 import { postNewActivity } from "../../Redux/Actions/activitiesActions";
 
@@ -7,6 +8,7 @@ import { postNewActivity } from "../../Redux/Actions/activitiesActions";
 
 function FormActivities() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     dispatch(getAllCountries());
@@ -287,6 +289,7 @@ function FormActivities() {
           </div>
         </div>
       </form>
+      <button onClick={() => navigate("/home")}>↩</button>
     </div>
   );
 }

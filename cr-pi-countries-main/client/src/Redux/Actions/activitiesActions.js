@@ -38,5 +38,11 @@ export function postNewActivity(activity) {
 }
 
 export function filterByActivity(activity) {
-  return { type: FILTER_BY_ACTIVITY, payload: activity };
+  return async function (dispatch) {
+    try {
+      dispatch({ type: FILTER_BY_ACTIVITY, payload: activity });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 }

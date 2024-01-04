@@ -55,17 +55,41 @@ export function getCountriesById(id) {
 }
 
 export function filterByContinent(continent) {
-  return { type: FILTER_BY_CONTINENT, payload: continent };
+  return async function (dispatch) {
+    try {
+      dispatch({ type: FILTER_BY_CONTINENT, payload: continent });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 }
 
 export function sortByAbc(order) {
-  return { type: SORT_BY_ABC, payload: order };
+  return async function (dispatch) {
+    try {
+      dispatch({ type: SORT_BY_ABC, payload: order });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 }
 
 export function sortByPopulation(orderPop) {
-  return { type: SORT_BY_POPULATION, payload: orderPop };
+  return async function (dispatch) {
+    try {
+      dispatch({ type: SORT_BY_POPULATION, payload: orderPop });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 }
 
 export function filterPage(number) {
-  return { type: FILTER_PAGE, payload: number };
+  return async function (dispatch) {
+    try {
+      dispatch({ type: FILTER_PAGE, payload: number });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 }

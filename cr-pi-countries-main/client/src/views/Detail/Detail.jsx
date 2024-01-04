@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getCountriesById } from "../../Redux/Actions/countriesActions";
 
@@ -7,6 +7,7 @@ import style from "./Detail.module.css";
 
 function Detail() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const countryData = useSelector((state) => state.countryById);
 
@@ -77,6 +78,7 @@ function Detail() {
           )}
         </div>
       </div>
+      <button onClick={() => navigate("/home")}>↩</button>
     </div>
   );
 }

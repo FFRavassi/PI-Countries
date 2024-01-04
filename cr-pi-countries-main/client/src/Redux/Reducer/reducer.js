@@ -24,11 +24,10 @@ const initialState = {
 export const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case GET_ALL_COUNTRIES:
-      let alphaDefault = payload.sort((a, b) => a.name.localeCompare(b.name));
       return {
         ...state,
-        allCountries: alphaDefault,
-        filteredCountries: alphaDefault,
+        allCountries: payload,
+        filteredCountries: payload,
       };
 
     case GET_COUNTRIES_BY_NAME:
@@ -105,13 +104,24 @@ export const rootReducer = (state = initialState, { type, payload }) => {
       let countriesWAct = [];
       let allCountries2 = state.allCountries;
 
-      const selectedAct = state.allActivities.find(
-        (ele) => ele.name === payload
-      );
-      for (let k = 0; k < selectedAct.countries.length; k++) {
-        for (let l = 0; l < allCountries2.length; l++) {
-          if (selectedAct.countries[k] === allCountries2[l].id) {
-            countriesWAct.push(allCountries2[l]);
+      if (Array.isArray(payload)) {
+        const uniqueCountries = new Set();
+        payload.forEach((act) => {
+          act.countries.forEach((countID) => uniqueCountries.add(countID));
+        });
+        const iDCountriesWAct = Array.from(uniqueCountries);
+        countriesWAct = allCountries2.filter((count) =>
+          iDCountriesWAct.includes(count.id)
+        );
+      } else {
+        const selectedAct = state.allActivities.find(
+          (ele) => ele.name === payload
+        );
+        for (let k = 0; k < selectedAct.countries.length; k++) {
+          for (let l = 0; l < allCountries2.length; l++) {
+            if (selectedAct.countries[k] === allCountries2[l].id) {
+              countriesWAct.push(allCountries2[l]);
+            }
           }
         }
       }

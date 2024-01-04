@@ -82,7 +82,6 @@ function Countries() {
             subregion={count.subregion}
             area={count.area}
             population={count.population}
-            activities={count.activities}
           />
         ))}
       </div>
