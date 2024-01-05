@@ -43,9 +43,12 @@ export const rootReducer = (state = initialState, { type, payload }) => {
       };
 
     case FILTER_BY_CONTINENT:
-      const continentFilter = state.allCountries.filter((country) =>
-        country.continent[0].includes(payload)
-      );
+      let continentFilter = [];
+      payload === "allContinents"
+        ? (continentFilter = [...state.allCountries])
+        : (continentFilter = [...state.allCountries].filter((country) =>
+            country.continent[0].includes(payload)
+          ));
       return {
         ...state,
         filteredCountries: continentFilter,
@@ -110,11 +113,11 @@ export const rootReducer = (state = initialState, { type, payload }) => {
           act.countries.forEach((countID) => uniqueCountries.add(countID));
         });
         const iDCountriesWAct = Array.from(uniqueCountries);
-        countriesWAct = allCountries2.filter((count) =>
-          iDCountriesWAct.includes(count.id)
+        countriesWAct = [...allCountries2].filter((count) =>
+          [...iDCountriesWAct].includes(count.id)
         );
       } else {
-        const selectedAct = state.allActivities.find(
+        const selectedAct = [...state.allActivities].find(
           (ele) => ele.name === payload
         );
         for (let k = 0; k < selectedAct.countries.length; k++) {
@@ -125,7 +128,6 @@ export const rootReducer = (state = initialState, { type, payload }) => {
           }
         }
       }
-
       return {
         ...state,
         filteredCountries: countriesWAct,

@@ -65,10 +65,10 @@ function FiltersYSort() {
           <p>Filter countries by continent:</p>
           <select
             name="selectContinent"
-            defaultValue="select"
+            defaultValue="all"
             onChange={handleContinentFilter}
           >
-            <option value="All">All</option>
+            <option value="allContinents">All</option>
             <option value="Africa">Africa</option>
             <option value="America">America</option>
             <option value="Antarctica">Antarctica</option>

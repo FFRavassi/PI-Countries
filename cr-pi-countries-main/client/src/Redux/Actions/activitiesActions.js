@@ -27,13 +27,14 @@ export function postNewActivity(activity) {
         "http://localhost:3001/activities",
         activity
       );
+      alert("The new activity has been created successfully");
       return dispatch({
         type: POST_NEW_ACTIVITY,
         payload: data,
       });
     };
   } catch (error) {
-    console.log(error.message);
+    alert("You must complete all the required fields");
   }
 }
 

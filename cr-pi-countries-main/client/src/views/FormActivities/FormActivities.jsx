@@ -29,9 +29,11 @@ function FormActivities() {
   //!-------------------------------------------HANDLERS-----------------------------------------------//
 
   function handleActName(e) {
+    const actName =
+      e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1);
     setInput({
       ...input,
-      name: e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1),
+      name: actName.trim(),
     });
   }
 
@@ -116,11 +118,9 @@ function FormActivities() {
     });
   }
 
-  function handleSubmit() {
+  function handleSubmit(e) {
+    e.preventDefault();
     dispatch(postNewActivity(input));
-    Object.keys(errors).length
-      ? alert("You must complete all the required fields")
-      : alert("The new activity has been created successfully");
     setInput({
       name: "",
       difficulty: "",
@@ -135,13 +135,13 @@ function FormActivities() {
   function validate(input) {
     let errors = {};
 
-    /* !input.name
+    !input.name
       ? (errors.name = "Activity's name is required")
       : input.name.length > 100
       ? (errors.name = "100 characters max")
-      : /^[^\W_]+$/.test(input.name)
-      ? (errors.name = "Special characters are not allowed")
-      : */ !input.difficulty
+      : !/^[a-zA-Z]+$/.test(input.name)
+      ? (errors.name = "Numbers or special characters are not allowed")
+      : !input.difficulty
       ? (errors.difficulty = "You must select a difficulty")
       : !input.duration
       ? (errors.duration = "You must select a duration for the activity")
@@ -168,7 +168,7 @@ function FormActivities() {
               onChange={handleActName}
             />
           </label>
-          {/* <span>{errors.name}</span> */}
+          <span>{errors.name}</span>
         </div>
 
         <div>
@@ -255,9 +255,19 @@ function FormActivities() {
           {errors.countries && <span>{errors.countries}</span>}
         </div>
 
-        <div>
-          <button>Create Activity</button>
-        </div>
+        {Object.keys(errors).length || !input.countries.length ? (
+          <>
+            <br />
+            <button disabled className="buttonCreate">
+              Create Activity
+            </button>
+          </>
+        ) : (
+          <>
+            <br />
+            <button className="buttonCreate">Create Activity</button>
+          </>
+        )}
 
         <div>
           <label>Selected Countries</label>
