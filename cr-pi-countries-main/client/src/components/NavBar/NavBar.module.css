@@ -1,0 +1,30 @@
+.container {
+  width: 101.2%;
+  display: flex;
+  justify-content: space-between;
+  margin: -1.9886mm 0 0 -2mm;
+  background-color: rgba(185, 184, 184, 0.507);
+  border-radius: 0 0 20px 20px;
+  backdrop-filter: blur(2px);
+}
+
+.logo {
+  padding: 1em 0 1em 2.5em;
+  align-self: center;
+}
+
+.buttonsCont {
+  padding: 1em 2.3em 1em 0;
+  align-self: center;
+}
+
+.buttons {
+  margin: 0.5em;
+  padding: 0.5em;
+  border-radius: 18px;
+  border: none;
+  font: bold 16px system-ui;
+  color: rgb(31, 29, 33);
+  background-color: rgba(255, 140, 0, 0.73);
+  cursor: pointer;
+}

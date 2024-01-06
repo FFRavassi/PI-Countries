@@ -17,7 +17,7 @@ import {
   getAllActivities,
 } from "../../Redux/Actions/activitiesActions";
 
-// import style from "./filtersYSort.module.css";
+import style from "./filtersYSort.module.css";
 
 function FiltersYSort() {
   const dispatch = useDispatch();
@@ -59,9 +59,9 @@ function FiltersYSort() {
   }
 
   return (
-    <div>
+    <div className={style.container}>
       <div>
-        <div>
+        <div className={style.continentCont}>
           <p>Filter countries by continent:</p>
           <select
             name="selectContinent"
@@ -78,7 +78,7 @@ function FiltersYSort() {
           </select>
         </div>
 
-        <div>
+        <div className={style.continentCont}>
           <p>Filter countries by activity:</p>
           <select
             name="activities"
@@ -101,9 +101,9 @@ function FiltersYSort() {
 
       <hr />
 
-      <div>
+      <div className={style.sortContainer}>
         <p>Sort countries by:</p>
-        <div>
+        <div className={style.radio}>
           <input
             type="radio"
             id="nameAsc"
@@ -113,7 +113,7 @@ function FiltersYSort() {
           />
           <label htmlFor="nameAsc">Name Asc</label>
         </div>
-        <div>
+        <div className={style.radio}>
           <input
             type="radio"
             id="nameDesc"
@@ -123,7 +123,7 @@ function FiltersYSort() {
           />
           <label htmlFor="nameDesc">Name Desc</label>
         </div>
-        <div>
+        <div className={style.radio}>
           <input
             type="radio"
             id="popAsc"
@@ -133,7 +133,7 @@ function FiltersYSort() {
           />
           <label htmlFor="popAsc">Population Asc</label>
         </div>
-        <div>
+        <div className={style.radio}>
           <input
             type="radio"
             id="popDesc"

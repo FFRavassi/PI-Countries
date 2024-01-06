@@ -1,11 +1,13 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { filterPage } from "../../Redux/Actions/countriesActions";
 
-// import style from "./Paging.module.css";
+import style from "./Paging.module.css";
 
 function Paging({ allCountries, countriesPerPage }) {
   const dispatch = useDispatch();
+
+  var activePage = useSelector((state) => state.activePage);
 
   const pageNumbers = [];
 
@@ -15,10 +17,13 @@ function Paging({ allCountries, countriesPerPage }) {
 
   return (
     <nav>
-      <div>
+      <div className={style.container}>
         {pageNumbers &&
           pageNumbers.map((number) => (
             <button
+              className={
+                activePage != number ? `${style.page}` : `${style.ActivePg}`
+              }
               key={number}
               type="button"
               onClick={() => dispatch(filterPage(number))}

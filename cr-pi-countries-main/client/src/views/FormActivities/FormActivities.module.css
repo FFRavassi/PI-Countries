@@ -1,19 +1,210 @@
-/* .superEasy {
-  color: chartreuse;
+.align {
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(185, 184, 184, 0.507);
+  backdrop-filter: blur(2px);
+  border-radius: 18px;
+  margin-top: 2.5em;
+  width: 22cm;
+  padding: 2em 0;
+}
+
+.container h1 {
+  font: bold 36.8px system-ui;
+}
+
+.properties {
+  font: bold 22px system-ui;
+}
+
+.actName {
+  margin-bottom: 2em;
+}
+
+.search {
+  border-radius: 4px;
+  border: 0;
+  outline: 0;
+  font: bold 18px system-ui;
+  margin-left: 0.7em;
+  height: 7mm;
+  background-color: rgba(255, 140, 0, 0.6);
+}
+
+.difficulty {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2em;
+}
+
+.range {
+  margin: 0 1em;
+  width: 18em;
+  accent-color: rgba(255, 140, 0);
+  cursor: pointer;
+}
+
+.superEasy {
+  font: bold 18px system-ui;
+  color: rgb(119, 235, 4);
 }
 
 .easy {
-  color: rgb(0, 73, 243);
+  font: bold 18px system-ui;
+  color: green;
 }
 
 .medium {
-  color: blueviolet;
+  font: bold 18px system-ui;
+  color: rgb(222, 222, 0);
 }
 
 .hard {
+  font: bold 18px system-ui;
   color: darkorange;
 }
 
 .reallyHard {
+  font: bold 18px system-ui;
   color: red;
-} */
+}
+
+.duration {
+  margin-bottom: 2em;
+}
+
+.duration input {
+  margin-left: 1em;
+  border-radius: 4px;
+  border: none;
+  outline: 0;
+  height: 7mm;
+  width: 3.5cm;
+  font: bold 15px system-ui;
+  background-color: rgba(255, 140, 0, 0.6);
+}
+
+.seasons {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2em;
+}
+
+.seasonOptions {
+  margin-top: 2mm;
+}
+
+.seasonOptions label {
+  font: bold 18px system-ui;
+  margin-left: 0.8em;
+  accent-color: rgba(255, 140, 0);
+}
+
+.select {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2em;
+}
+
+.select select {
+  margin-left: 1em;
+  background-color: rgba(255, 140, 0, 0.6);
+  border-radius: 4px;
+  border: none;
+  outline: 0;
+  font: bold 14px system-ui;
+  height: 8mm;
+}
+
+.selectionContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin-top: 0.7em;
+  background-color: rgba(255, 140, 0, 0.6);
+  border-radius: 18px;
+  padding: 0.2em 1.2em;
+  height: 6cm;
+  width: 13cm;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.selectionContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.flags {
+  margin: 0.4em 0.5em;
+}
+
+.selectionContainer button {
+  display: flex;
+  align-items: flex-end;
+  margin: 0 0 -0.9em -1em;
+  font: bolder 22px system-ui;
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+}
+
+.selectionContainer img {
+  border-radius: 18px;
+  object-fit: cover;
+  height: 1.5cm;
+  padding: 1em 0;
+}
+
+.selectionContainer span {
+  font: bold 14px system-ui;
+  display: flex;
+  justify-content: center;
+  margin-top: -1em;
+  cursor: default;
+}
+
+.create {
+  position: relative;
+  margin-top: 0.7em;
+  padding: 0.8em;
+  border-radius: 18px;
+  border: none;
+  font: bold 22px system-ui;
+  color: rgb(31, 29, 33);
+  background-color: rgba(255, 140, 0, 0.73);
+  cursor: pointer;
+  transition: 0.35s;
+  left: 33%;
+}
+
+.create:hover {
+  transform: translate(0, -2mm);
+  box-shadow: 0 3mm 15px rgba(0, 0, 0, 0.8);
+}
+
+.backButton {
+  position: absolute;
+  left: 85%;
+  top: 100%;
+  font: bolder 80px system-ui;
+  text-shadow: -2.5px 2.5px 0 rgba(0, 0, 0);
+  padding: 0.5em;
+  border-radius: 100%;
+  border: none;
+  cursor: pointer;
+  background-color: rgba(255, 140, 0, 0.73);
+}
+
+.errors {
+  font: bold 14px system-ui;
+  color: red;
+  margin-left: 0.7em;
+}

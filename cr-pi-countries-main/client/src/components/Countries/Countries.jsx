@@ -69,7 +69,7 @@ function Countries() {
   );
 
   return (
-    <div>
+    <div className={style.union}>
       <div className={style.disposition}>
         {currentCountries.map((count) => (
           <Country

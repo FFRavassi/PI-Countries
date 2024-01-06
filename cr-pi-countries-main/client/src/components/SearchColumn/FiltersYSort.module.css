@@ -1,0 +1,40 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.continentCont {
+  margin: 2em 0;
+}
+
+.continentCont p {
+  font: bold 16px system-ui;
+  margin-bottom: 2mm;
+}
+
+.continentCont select {
+  font: bold 14px system-ui;
+  border-radius: 4px;
+  border: 0;
+  outline: 0;
+}
+
+.sortContainer {
+  margin-top: -1.5em;
+}
+
+.sortContainer p {
+  font: bold 16px system-ui;
+  margin-bottom: 2mm;
+}
+
+.radio input {
+  accent-color: rgba(255, 140, 0);
+  border: none;
+  outline: none;
+}
+
+.radio label {
+  font: bold 14px system-ui;
+  padding-left: 1mm;
+}

@@ -1,1 +1,30 @@
+.container {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 3em 0 1.5em 1.2em;
+}
 
+.page {
+  border: none;
+  border-radius: 100%;
+  width: 0.8cm;
+  height: 0.8cm;
+  font: bold 16px system-ui;
+  cursor: pointer;
+  background-color: rgba(185, 184, 184, 0.507);
+  transition: 0.5s;
+}
+
+.page:active {
+  transform: translate(0, -4mm);
+}
+
+.ActivePg {
+  border: none;
+  border-radius: 100%;
+  width: 0.8cm;
+  height: 0.8cm;
+  font: bold 16px system-ui;
+  cursor: pointer;
+  background-color: rgba(255, 140, 0, 0.73);
+}

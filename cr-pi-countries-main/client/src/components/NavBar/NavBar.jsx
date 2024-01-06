@@ -1,6 +1,8 @@
 import React from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 
+import style from "./NavBar.module.css";
+
 function NavBar() {
   const history = useNavigate();
   const location = useLocation();
@@ -10,25 +12,30 @@ function NavBar() {
   };
 
   return (
-    <div>
+    <div className={style.container}>
       <img
+        className={style.logo}
         src="https://upload.wikimedia.org/wikipedia/commons/5/50/Earth_clip_art.svg"
         alt="logo"
-        width="5%"
+        width="7%"
       />
-      <div>
+      <div className={style.buttonsCont}>
         <Link to="/home">
-          <button id="home" onClick={refresh}>
+          <button className={style.buttons} id="home" onClick={refresh}>
             Home
           </button>
         </Link>
 
         <Link to="/activities">
-          <button id="add">Add Activity</button>
+          <button className={style.buttons} id="add">
+            Add Activity
+          </button>
         </Link>
 
         <Link to="/">
-          <button id="out">Out</button>
+          <button className={style.buttons} id="out">
+            Out
+          </button>
         </Link>
       </div>
     </div>

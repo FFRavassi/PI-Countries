@@ -5,7 +5,7 @@ import {
   getAllCountries,
 } from "../../Redux/Actions/countriesActions";
 
-// import style from "./SearchBar.module.css"
+import style from "./SearchBar.module.css";
 
 function SearchBar({ setSelectedCountry }) {
   const dispatch = useDispatch();
@@ -42,16 +42,23 @@ function SearchBar({ setSelectedCountry }) {
 
   return (
     <>
-      <button onClick={() => dispatch(getAllCountries())}>Restart</button>
-      <form onSubmit={handleSubmit}>
+      <button
+        className={style.button}
+        onClick={() => dispatch(getAllCountries())}
+      >
+        Restart
+      </button>
+      <form className={style.searcher} onSubmit={handleSubmit}>
         <label>Search country:</label>
-        <input
-          type="text"
-          id="search"
-          value={searchString}
-          onChange={handleChange}
-        />
-        <input type="submit" id="search" value="Search" />
+        <div className={style.bar}>
+          <input className={style.bar1}
+            type="text"
+            id="search"
+            value={searchString}
+            onChange={handleChange}
+          />
+          <input className={style.bar2} type="submit" id="search" value="Search" />
+        </div>
       </form>
     </>
   );

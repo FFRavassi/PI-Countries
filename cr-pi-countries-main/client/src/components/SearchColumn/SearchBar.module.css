@@ -1,0 +1,36 @@
+.button {
+  padding: 0.3em;
+  border-radius: 18px;
+  border: none;
+  font: bold 20px system-ui;
+  color: rgb(31, 29, 33);
+  background-color: rgba(255, 140, 0, 0.73);
+  cursor: pointer;
+}
+
+.searcher {
+  font: bold 16px system-ui;
+  margin-top: 2em;
+}
+
+.bar {
+  display: flex;
+  margin-top: 0.4em;
+}
+
+.bar1 {
+  width: 8.5em;
+  border-radius: 4px 0 0 4px;
+  border: 0;
+  outline: 0;
+  font: bold 14px system-ui;
+}
+
+.bar2 {
+  font: bold 14px system-ui;
+  border-radius: 0 4px 4px 0;
+  border: 0;
+  outline: 0;
+  background-color: rgba(255, 140, 0, 0.73);
+  cursor: pointer;
+}

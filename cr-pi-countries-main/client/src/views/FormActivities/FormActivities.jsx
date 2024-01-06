@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { getAllCountries } from "../../Redux/Actions/countriesActions";
 import { postNewActivity } from "../../Redux/Actions/activitiesActions";
 
-// import style from "./FormActivities.module.css";
+import style from "./FormActivities.module.css";
 
 function FormActivities() {
   const dispatch = useDispatch();
@@ -57,14 +57,14 @@ function FormActivities() {
 
   function changeDifficulty(difficulty) {
     const difficultyNames = [
-      { name: "Super Easy" /* className: style.superEasy */ },
-      { name: "Easy" /* className: style.easy */ },
-      { name: "Medium" /* className: style.medium */ },
-      { name: "Hard" /* className: style.hard */ },
-      { name: "Really Hard" /* className: style.reallyHard */ },
+      { name: "Super Easy", className: style.superEasy },
+      { name: "Easy", className: style.easy },
+      { name: "Medium", className: style.medium },
+      { name: "Hard", className: style.hard },
+      { name: "Really Hard", className: style.reallyHard },
     ];
-    diffText.current.innerText = difficultyNames[difficulty - 1].name; /* 
-    diffText.current.className = difficultyNames[difficulty - 1].className; */
+    diffText.current.innerText = difficultyNames[difficulty - 1].name;
+    diffText.current.className = difficultyNames[difficulty - 1].className;
   }
 
   function handleDuration(e) {
@@ -155,151 +155,168 @@ function FormActivities() {
   }
 
   return (
-    <div>
-      <h1>New Activity</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>
-            Name
-            <input
-              type="text"
-              autoComplete="off"
-              value={input.name}
-              onChange={handleActName}
-            />
-          </label>
-          <span>{errors.name}</span>
-        </div>
-
-        <div>
-          <label htmlFor="difficulty">Difficulty Level</label>
-          <input
-            type="range"
-            min="1"
-            max="5"
-            id="difficulty"
-            defaultValue={1}
-            onChange={(e) => handleDifficulty(e)}
-          />
-          <p ref={diffText} /*  className={style.superEasy} */>Super Easy</p>
-          {errors.difficulty && <span>{errors.difficulty}</span>}
-        </div>
-
-        <div>
-          <label>
-            Duration(hs)
-            <input
-              type="number"
-              value={input.duration}
-              placeholder=" Max:12 hours"
-              step="0.5"
-              min="0.5"
-              max="12"
-              onChange={handleDuration}
-            />
-          </label>
-          {errors.duration && <span>{errors.duration}</span>}
-        </div>
-
-        <div>
-          <label>Season</label>
-          <div>
-            <label>
+    <div className={style.align}>
+      <div className={style.container}>
+        <h1>New Activity</h1>
+        <form onSubmit={handleSubmit}>
+          <div className={style.actName}>
+            <label className={style.properties}>
+              Name
               <input
-                value="Summer"
-                type="checkbox"
-                onChange={(e) => handleSeason(e)}
+                className={style.search}
+                type="text"
+                autoComplete="off"
+                value={input.name}
+                onChange={handleActName}
               />
-              Summer
             </label>
-
-            <label>
-              <input
-                value="Autum"
-                type="checkbox"
-                onChange={(e) => handleSeason(e)}
-              />
-              Autum
-            </label>
-
-            <label>
-              <input
-                value="Winter"
-                type="checkbox"
-                onChange={(e) => handleSeason(e)}
-              />
-              Winter
-            </label>
-
-            <label>
-              <input
-                value="Spring"
-                type="checkbox"
-                onChange={(e) => handleSeason(e)}
-              />
-              Spring
-            </label>
-            {errors.season && <span>{errors.season}</span>}
+            <span className={style.errors}>{errors.name}</span>
           </div>
-        </div>
 
-        <div>
-          <label>Select Countries</label>
-          <select onChange={(e) => handleCountSelect(e)}>
-            {allCountries.map((country) => (
-              <option key={country.id} value={country.id}>
-                {country.name}
-              </option>
-            ))}
-          </select>
-          {errors.countries && <span>{errors.countries}</span>}
-        </div>
+          <div className={style.difficulty}>
+            <label htmlFor="difficulty" className={style.properties}>
+              Difficulty Level
+            </label>
+            <input
+              className={style.range}
+              type="range"
+              min="1"
+              max="5"
+              id="difficulty"
+              defaultValue={1}
+              onChange={(e) => handleDifficulty(e)}
+            />
+            <p ref={diffText} className={style.superEasy}>
+              Super Easy
+            </p>
+            {errors.difficulty && <span className={style.errors}>{errors.difficulty}</span>}
+          </div>
 
-        {Object.keys(errors).length || !input.countries.length ? (
-          <>
-            <br />
-            <button disabled className="buttonCreate">
-              Create Activity
-            </button>
-          </>
-        ) : (
-          <>
-            <br />
-            <button className="buttonCreate">Create Activity</button>
-          </>
-        )}
+          <div className={style.duration}>
+            <label className={style.properties}>
+              Duration (hs)
+              <input
+                type="number"
+                value={input.duration}
+                placeholder=" Max:12 hours"
+                step="0.5"
+                min="0.5"
+                max="12"
+                onChange={handleDuration}
+              />
+            </label>
+            {errors.duration && <span className={style.errors}>{errors.duration}</span>}
+          </div>
 
-        <div>
-          <label>Selected Countries</label>
+          <div className={style.seasons}>
+            <label className={style.properties}>Season</label>
+            <div className={style.seasonOptions}>
+              <label>
+                <input
+                  value="Summer"
+                  type="checkbox"
+                  onChange={(e) => handleSeason(e)}
+                />
+                Summer
+              </label>
+
+              <label>
+                <input
+                  value="Autum"
+                  type="checkbox"
+                  onChange={(e) => handleSeason(e)}
+                />
+                Autum
+              </label>
+
+              <label>
+                <input
+                  value="Winter"
+                  type="checkbox"
+                  onChange={(e) => handleSeason(e)}
+                />
+                Winter
+              </label>
+
+              <label>
+                <input
+                  value="Spring"
+                  type="checkbox"
+                  onChange={(e) => handleSeason(e)}
+                />
+                Spring
+              </label>
+              {errors.season && <span className={style.errors}>{errors.season}</span>}
+            </div>
+          </div>
+
+          <div className={style.select}>
+            <label className={style.properties}>Select Countries</label>
+            <select onChange={(e) => handleCountSelect(e)}>
+              {allCountries.map((country) => (
+                <option key={country.id} value={country.id}>
+                  {country.name}
+                </option>
+              ))}
+            </select>
+            {errors.countries && <span className={style.errors}>{errors.countries}</span>}
+          </div>
+
           <div>
-            {input.countries.length ? (
-              <div>
-                {input.countries?.map((count) => {
-                  const countFromST = allCountries?.find((c) => c.id === count);
-                  if (countFromST) {
-                    return (
-                      <div key={countFromST.id}>
-                        <a href="#" onClick={handleDelete} id={countFromST.id}>
-                          &times;
-                        </a>
-                        <img
-                          src={countFromST.flag}
-                          alt={countFromST.id}
-                          width="100px"
-                        ></img>
-                        <span>{countFromST.id}</span>
-                      </div>
+            <label className={style.properties}>Countries Selected</label>
+            <div>
+              {input.countries.length ? (
+                <div className={style.selectionContainer}>
+                  {input.countries?.map((count) => {
+                    const countFromST = allCountries?.find(
+                      (c) => c.id === count
                     );
-                  }
-                })}
-              </div>
-            ) : (
-              <p>No countries selected yet</p>
-            )}
+                    if (countFromST) {
+                      return (
+                        <div className={style.flags} key={countFromST.id}>
+                          <button
+                            href="#"
+                            onClick={handleDelete}
+                            id={countFromST.id}
+                          >
+                            &times;
+                          </button>
+                          <img
+                            className={style.countrySelected}
+                            src={countFromST.flag}
+                            alt={countFromST.id}
+                            width="100px"
+                          ></img>
+                          <span>{countFromST.id}</span>
+                        </div>
+                      );
+                    }
+                  })}
+                </div>
+              ) : (
+                <p>No countries selected yet</p>
+              )}
+            </div>
           </div>
-        </div>
-      </form>
-      <button onClick={() => navigate("/home")}>↩</button>
+
+          {Object.keys(errors).length || !input.countries.length ? (
+            <>
+              <br />
+              <button className={style.create} disabled>
+                Create Activity
+              </button>
+            </>
+          ) : (
+            <>
+              <br />
+              <button className={style.create}>Create Activity</button>
+            </>
+          )}
+        </form>
+      </div>
+      <button className={style.backButton} onClick={() => navigate("/home")}>
+        ↩
+      </button>
     </div>
   );
 }

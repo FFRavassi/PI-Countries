@@ -1,12 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-// import style from "./Landing.module.css";
+import style from "./Landing.module.css";
 
 function Landing() {
   return (
     <>
-      <div>
+      <div className={style.links}>
+        <p>Contact me!!</p>
         <Link to="https://linkedin.com/in/francesco-ravassi">
           <button id="linkedin">LinkedIn</button>
         </Link>
@@ -15,14 +16,14 @@ function Landing() {
         </Link>
       </div>
 
-      <div>
+      <div className={style.start}>
         <img
           src="https://upload.wikimedia.org/wikipedia/commons/5/50/Earth_clip_art.svg"
           alt="logo"
-          width="10%"
+          width="17%"
         />
         <Link to="/home">
-          <button id="start">Start</button>
+          <button id="start">Start Exploring!!</button>
         </Link>
       </div>
     </>
