@@ -41,7 +41,9 @@ const findCountryById = async (id) => {
       },
     },
   });
-  
+
+  if (!detail) throw Error("Invalid ID");
+
   return detail;
 };
 

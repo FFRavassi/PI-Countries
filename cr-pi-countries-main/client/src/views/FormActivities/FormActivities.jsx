@@ -94,10 +94,12 @@ function FormActivities() {
   }
 
   function handleCountSelect(e) {
-    setInput({
-      ...input,
-      countries: [...input.countries, e.target.value],
-    });
+    input.countries.find((count) => count === e.target.value)
+      ? alert("Country already selected")
+      : setInput({
+          ...input,
+          countries: [...input.countries, e.target.value],
+        });
     setErrors(
       validate({
         ...input,
@@ -189,7 +191,9 @@ function FormActivities() {
             <p ref={diffText} className={style.superEasy}>
               Super Easy
             </p>
-            {errors.difficulty && <span className={style.errors}>{errors.difficulty}</span>}
+            {errors.difficulty && (
+              <span className={style.errors}>{errors.difficulty}</span>
+            )}
           </div>
 
           <div className={style.duration}>
@@ -205,7 +209,9 @@ function FormActivities() {
                 onChange={handleDuration}
               />
             </label>
-            {errors.duration && <span className={style.errors}>{errors.duration}</span>}
+            {errors.duration && (
+              <span className={style.errors}>{errors.duration}</span>
+            )}
           </div>
 
           <div className={style.seasons}>
@@ -246,7 +252,9 @@ function FormActivities() {
                 />
                 Spring
               </label>
-              {errors.season && <span className={style.errors}>{errors.season}</span>}
+              {errors.season && (
+                <span className={style.errors}>{errors.season}</span>
+              )}
             </div>
           </div>
 
@@ -259,7 +267,9 @@ function FormActivities() {
                 </option>
               ))}
             </select>
-            {errors.countries && <span className={style.errors}>{errors.countries}</span>}
+            {errors.countries && (
+              <span className={style.errors}>{errors.countries}</span>
+            )}
           </div>
 
           <div>
@@ -294,7 +304,7 @@ function FormActivities() {
                   })}
                 </div>
               ) : (
-                <p>No countries selected yet</p>
+                <p className={style.warning}>No countries selected yet</p>
               )}
             </div>
           </div>
@@ -302,7 +312,7 @@ function FormActivities() {
           {Object.keys(errors).length || !input.countries.length ? (
             <>
               <br />
-              <button className={style.create} disabled>
+              <button className={style.createInactive} disabled>
                 Create Activity
               </button>
             </>
