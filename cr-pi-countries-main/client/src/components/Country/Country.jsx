@@ -8,7 +8,12 @@ function Country(props) {
     <div className={style.container}>
       <img src={props.flag} alt={props.name} />
       <div className={style.info}>
-        <h2>{props.name}</h2>
+        {props.name <= 33 ? (
+          <h2 className={style.shortName}>{props.name}</h2>
+        ) : (
+          <h2 className={style.longName}>{props.name}</h2>
+        )}
+
         {props.continent == "North America" ||
         props.continent == "South America" ? (
           <p>America</p>

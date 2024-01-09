@@ -178,22 +178,22 @@ function FormActivities() {
           <div className={style.difficulty}>
             <label htmlFor="difficulty" className={style.properties}>
               Difficulty Level
+              <input
+                className={style.range}
+                type="range"
+                min="1"
+                max="5"
+                id="difficulty"
+                defaultValue={1}
+                onChange={(e) => handleDifficulty(e)}
+              />
+              {errors.difficulty && (
+                <span className={style.errors}>{errors.difficulty}</span>
+              )}
             </label>
-            <input
-              className={style.range}
-              type="range"
-              min="1"
-              max="5"
-              id="difficulty"
-              defaultValue={1}
-              onChange={(e) => handleDifficulty(e)}
-            />
             <p ref={diffText} className={style.superEasy}>
               Super Easy
             </p>
-            {errors.difficulty && (
-              <span className={style.errors}>{errors.difficulty}</span>
-            )}
           </div>
 
           <div className={style.duration}>
@@ -215,7 +215,13 @@ function FormActivities() {
           </div>
 
           <div className={style.seasons}>
-            <label className={style.properties}>Season</label>
+            <label className={style.properties}>
+              Season
+              {errors.season && (
+                <span className={style.errors}>{errors.season}</span>
+              )}
+            </label>
+
             <div className={style.seasonOptions}>
               <label>
                 <input
@@ -252,14 +258,16 @@ function FormActivities() {
                 />
                 Spring
               </label>
-              {errors.season && (
-                <span className={style.errors}>{errors.season}</span>
-              )}
             </div>
           </div>
 
           <div className={style.select}>
-            <label className={style.properties}>Select Countries</label>
+            <label className={style.properties}>
+              Select Countries
+              {errors.countries && (
+                <span className={style.errors}>{errors.countries}</span>
+              )}
+            </label>
             <select onChange={(e) => handleCountSelect(e)}>
               {allCountries.map((country) => (
                 <option key={country.id} value={country.id}>
@@ -267,9 +275,6 @@ function FormActivities() {
                 </option>
               ))}
             </select>
-            {errors.countries && (
-              <span className={style.errors}>{errors.countries}</span>
-            )}
           </div>
 
           <div>

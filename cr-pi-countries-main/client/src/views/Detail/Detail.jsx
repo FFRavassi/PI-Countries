@@ -26,7 +26,11 @@ function Detail() {
               width="200px"
             />
 
-            <h1 className={style.h1Small}>{countryData.name}</h1>
+            {countryData.name >= 35 ? (
+              <h1 className={style.h1Small}>{countryData.name}</h1>
+            ) : (
+              <h1 className={style.h1Large}>{countryData.name}</h1>
+            )}
           </div>
           <div className={style.data}>
             {countryData.continent == "North America" ||
@@ -44,8 +48,12 @@ function Detail() {
 
         <div className={style.actContainer}>
           <h2>Activities</h2>
-          <div className={style.listAct}>
-            {countryData.Activities && (
+          {countryData.Activities.length === 0 ? (
+            <h3 className={style.warning}>
+              There are no activities created for this country
+            </h3>
+          ) : (
+            <div className={style.listAct}>
               <>
                 {countryData.Activities.map((act) => {
                   return (
@@ -77,8 +85,8 @@ function Detail() {
                   );
                 })}
               </>
-            )}
-          </div>
+            </div>
+          )}
         </div>
       </div>
       <button className={style.button} onClick={() => navigate("/home")}>

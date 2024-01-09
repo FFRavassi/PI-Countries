@@ -98,7 +98,7 @@
 }
 
 .seasonOptions {
-  margin-top: 2mm;
+  margin-top: 1mm;
 }
 
 .seasonOptions label {
@@ -133,7 +133,7 @@
   background-color: rgba(255, 140, 0, 0.6);
   border-radius: 18px;
   padding: 0.2em 1.2em;
-  height: 6cm;
+  max-height: 6cm;
   width: 13cm;
   overflow: hidden;
   overflow-y: scroll;
@@ -218,9 +218,11 @@
 }
 
 .errors {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
   font: bold 14px system-ui;
   color: red;
-  margin-left: 0.7em;
 }
 
 .warning {
